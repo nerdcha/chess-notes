@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Chess Notes</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,650;1,400&family=IBM+Plex+Mono&display=swap">
+<style>
+:root {
+  --paper: #f3f1ea; --card: #fbfaf6; --ink: #1c1f1b; --muted: #5d655d;
+  --rule: #d9d6cc; --accent: #3f6b3a; --accent-ink: #2d5129; --lift: #e9efe3;
+  --code: #ebe9e0; --dark-sq: #769656; --light-sq: #eeeed2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15181a; --card: #1d2124; --ink: #e9e8e2; --muted: #a0a89f;
+    --rule: #2f353a; --accent: #8fbf7b; --accent-ink: #a9d497; --lift: #1f2a21;
+    --code: #23282c; --dark-sq: #5f7a48; --light-sq: #c9c9ae; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper); color: var(--ink); margin: 0;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px; line-height: 1.5;
+  padding: 0 16px; padding-block: env(safe-area-inset-top, 0px) 48px;
+}
+main { max-width: 38rem; margin: 0 auto; }
+nav.top {
+  display: flex; align-items: center; gap: 12px; padding: 14px 0 10px;
+  border-bottom: 1px solid var(--rule); margin-bottom: 18px;
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.05em; font-size: 1rem; color: var(--muted);
+}
+nav.top a { color: var(--accent-ink); text-decoration: none; font-weight: 600; }
+nav.top .sq {
+  width: 14px; height: 14px; flex: none;
+  background: conic-gradient(var(--dark-sq) 0 25%, var(--light-sq) 0 50%, var(--dark-sq) 0 75%, var(--light-sq) 0);
+}
+h1, h2, h3, h4 {
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.03em; text-wrap: balance; line-height: 1.1;
+  margin: 1.6em 0 0.5em;
+}
+h1 { font-size: 2.3rem; margin-top: 0.2em; font-weight: 700; }
+h2 { font-size: 1.5rem; color: var(--accent-ink); padding-top: 0.6em; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; color: var(--muted); }
+p { margin: 0 0 1em; }
+ul, ol { padding-left: 1.3rem; margin: 0 0 1em; }
+li { margin-bottom: 0.35em; }
+strong { color: var(--accent-ink); font-weight: 650; }
+a { color: var(--accent-ink); }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 1.8em 0; }
+code { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 0.9em; background: var(--code); padding: 0.1em 0.3em; border-radius: 3px; }
+pre { background: var(--code); padding: 12px 14px; overflow-x: auto; border-radius: 4px; font-size: 0.9rem; line-height: 1.4; }
+pre code { background: none; padding: 0; }
+blockquote { border-left: 4px solid var(--accent); margin: 0 0 1em; padding: 0.2em 0 0.2em 14px; color: var(--muted); }
+.table-wrap { overflow-x: auto; margin: 0 0 1.2em; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; font-size: 0.93rem; min-width: 100%; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; color: var(--muted); }
+figure { margin: 1.2em 0 1.4em; }
+figure svg { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+figcaption { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 8px; font-style: italic; }
+.landing-card { background: var(--lift); border: 1px solid var(--rule); border-left: 5px solid var(--accent); padding: 4px 16px 10px; margin: 0 0 24px; }
+.landing-card h1 { font-size: 1.6rem; }
+.landing-card h2 { font-size: 1.15rem; border-top: 0; padding-top: 0.4em; }
+.landing-card ul { list-style: none; padding: 0; }
+.landing-card li { padding-left: 1.1rem; position: relative; }
+.landing-card li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; background: var(--accent); }
+.toc h2 { border-top: 0; font-size: 1.1rem; color: var(--muted); margin-top: 1.4em; }
+.toc ul { list-style: none; padding: 0; }
+.toc li { margin: 0; border-bottom: 1px solid var(--rule); }
+.toc a { display: block; padding: 12px 0; text-decoration: none; font-size: 1.15rem; font-weight: 600; }
+.toc a span { display: block; font-weight: 400; font-size: 0.9rem; color: var(--muted); }
+details { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; margin: 0 0 1.4em; }
+summary {
+  cursor: pointer; padding: 10px 14px; color: var(--accent-ink); font-weight: 650;
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.05rem;
+}
+details[open] summary { border-bottom: 1px solid var(--rule); }
+details > :not(summary) { margin-left: 14px; margin-right: 14px; }
+details > :last-child { margin-bottom: 12px; }
+.stamp { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
+</head>
+<body><main>
+<nav class="top"><span class="sq"></span>Chess Notes</nav>
+<p class="stamp">Updated 31 Oct 2026</p><section class="landing-card"><h1>Pregame Card</h1>
+<p>Thirty seconds before you play. One compass per opening, the reflexes that have cost you games,
+and the last lesson. Nothing else.</p>
+<h2>Every move, half a second</h2>
+<ul>
+<li>A piece just arrived in your half? First ask whether it is simply hanging.</li>
+<li>A piece just left a square? Trace the line it stopped blocking.</li>
+<li>Check first, collect second. Qa4+ before any automatic recapture.</li>
+<li>Before landing a piece, name what attacks that square. Count attackers one move away too.</li>
+</ul>
+<h2>Botvinnik (White)</h2>
+<p><strong>Compass:</strong> Fianchetto first, then the centre. Setup done? h3, Kh2, then f4-f5.</p>
+<ul>
+<li>1...d5: <strong>cxd5</strong>, just take. After 2...c6 or 2...e6, take again.</li>
+<li>1...e5 2.Nc3 Nf6 3.g3 <strong>d5</strong> (one game in five): <strong>cxd5</strong> before Bg2. If they ever hold your
+  c-pawn on c4 with their king on e8: <strong>Qa4+</strong> first, collect second.</li>
+<li>...Bg4 pinning Nge2 with a knight on d4 or about to land there: <strong>f3</strong>, not h3.</li>
+<li>You played a3+b4 and ...a5 appears: move the knight (<strong>Na4</strong>) before any setup move.</li>
+<li>The pawns in front of your tucked king are bodyguards. Push them to attack, never to grab.</li>
+<li>A ...c6/...d5 duo hits c4 and e4: resolve it yourself with <strong>cxd5</strong>.</li>
+<li>Before any trade, ask whose piece is better. A knight on <strong>d5 stays on d5</strong>.</li>
+<li>1...c6 2.Nc3 d5 3.cxd5 cxd5: <strong>4.d4</strong> before g3, or ...d4 kicks your knight. Later, if ...e5
+  leaves d5 isolated: count attackers and <strong>take it</strong>.</li>
+</ul>
+<h2>Caro-Kann (Black vs 1.e4)</h2>
+<p><strong>Compass:</strong> Take, push or defend: each has one plan. Bishop out before ...e6; vs the push, everything hits d4.</p>
+<ul>
+<li>3.e5: <strong>...c5!</strong> then ...Nc6. Vs Nf3: ...cxd4 first, then ...Bg4 and take on f3. Vs dxc5:
+  <strong>...e6</strong>, ...Bxc5.</li>
+<li>2.e5: <strong>...d5</strong>. 3.d4 is the Advance (...c5); 3.exd6 ...exd6, then ...d5 and ...Re8.</li>
+<li>3.exd5: ...cxd5, then <strong>...Bg4</strong> pins the d4 defender, <strong>...Rc8</strong> every game, then ...b5-b4.</li>
+<li>3.Nc3 or 3.Nd2: ...dxe4, ...Nf6, ...exf6. Castle, <strong>then</strong> Bg4. Knight to f8 means no mate.</li>
+<li>2.Bc4, 2.Nc3, anything odd: <strong>...d5</strong> anyway.</li>
+<li>Queens off suits you here. Trade when offered, then play the structure.</li>
+</ul>
+<h2>KID-ish (Black vs everything else)</h2>
+<p><strong>Compass:</strong> Nf6 first. Your pawn chain points where you attack. The g7 bishop is never for sale.</p>
+<ul>
+<li>See c4? <strong>...e5</strong>. No c4? <strong>...c5</strong>.</li>
+<li>London 7.c3: <strong>...cxd4</strong>, ...Nc6, <strong>...Qb6</strong>, then <strong>...Nb4</strong> hits the d3 bishop. Qb3? Qxb3.
+  Knight kicks the queen? Qc7. b2 only when no knight can reach c4.</li>
+<li>Their queen ate b7? <strong>Rb8</strong> and chase her. Never offer the trade.</li>
+<li>White plays d5 against ...e5: <strong>Ne8, f5, gxf5</strong> with the pawn, f4, g5-g4. Ignore their queenside.</li>
+<li>Bh6? <strong>Bh8</strong>. Never ...Bxc3 or ...Bxd4 for a pawn.</li>
+<li>d5 hits your Nc6 (London): <strong>...Ne5</strong>, recapture ...dxe5. Then a6, b5, Rb8.</li>
+<li>e5 hits your Nf6: can you just take it? If not, <strong>Nfd7</strong> and chip with ...c5 or ...f6.</li>
+<li>Pawns trap, exchanges relieve. Tighten with a pawn instead of cashing in.</li>
+</ul>
+<h2>Endgame</h2>
+<p><strong>Compass:</strong> Queens off? King on. Then push the passer.</p>
+<ul>
+<li>Ahead: pieces off. Behind: pawns off.</li>
+<li>Rooks behind passed pawns, yours or theirs.</li>
+<li>Bare king? Before every quiet move, ask whether he has one.</li>
+</ul>
+<h2>Last lesson</h2>
+<p><strong>Their queen ate b7? Rb8, chase her, never trade.</strong> A queen in your camp is out of play; a
+trade rescues her. (FPWgeBkK, 31 Oct 2026.) The one before: a pawn is a curtain too. It cost this
+game as well: 17...e5 moved d6 off the g3-c7 diagonal and the c7 rook fell.</p>
+<p>Carefree smile. One lesson is all you need. Go.</p></section><section class="toc">
+<h2>Botvinnik (White)</h2><ul>
+<li><a href="botvinnik-reflexes/">Botvinnik System - Quick Reflexes<span>The finished article — setup complete, king tucked on h2, and the whole point of the opening in green:</span></a></li>
+<li><a href="botvinnik-quiz/">Botvinnik Attack Quiz<span>Positions from amateur Lichess games (players rated about 1100 to 1750) where White built the Botvinnik setup and went for the king. Whit...</span></a></li>
+</ul>
+<h2>Caro-Kann (Black vs 1.e4)</h2><ul>
+<li><a href="caro-reflexes/">Caro-Kann - Quick Reflexes (the Banzea system)<span>The system is IM Alex Banzea&#x27;s &quot;Caro-Kann: Simplified&quot; (sources at the bottom). Every line below has been checked with Stockfish 17 (dept...</span></a></li>
+</ul>
+<h2>KID-ish (Black vs the rest)</h2><ul>
+<li><a href="kid-reflexes/">KID-ish System - Quick Reflexes<span>After 1...Nf6, continue with g6, Bg7, O-O, d6 — same setup, but you&#x27;ve denied White the e4 option.</span></a></li>
+<li><a href="kid-middlegame-themes/">KID Middlegame Themes - The Game-Plan Compass<span>You&#x27;ve got the setup (Nf6, g6, Bg7, O-O, d6, then ...e5 or ...c5). This note is about what happens NEXT — the middlegame, where 900-level...</span></a></li>
+</ul>
+<h2>Endgame</h2><ul>
+<li><a href="endgame-reflexes/">Endgame Reflexes (Starter)<span>Why this exists: at 2+1, games actually reach endgames (at 1+0 they mostly didn&#x27;t — the very first recorded game lost a *winning* positio...</span></a></li>
+</ul>
+<h2>Record</h2><ul>
+<li><a href="game-log/">Game Log<span>One line per reviewed game. The Held? column is the only metric that matters: did the lesson from the *previous* reviewed game show up in...</span></a></li>
+</ul>
+</section>
+</main></body>
+</html>

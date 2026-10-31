@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Game Log</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,650;1,400&family=IBM+Plex+Mono&display=swap">
+<style>
+:root {
+  --paper: #f3f1ea; --card: #fbfaf6; --ink: #1c1f1b; --muted: #5d655d;
+  --rule: #d9d6cc; --accent: #3f6b3a; --accent-ink: #2d5129; --lift: #e9efe3;
+  --code: #ebe9e0; --dark-sq: #769656; --light-sq: #eeeed2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15181a; --card: #1d2124; --ink: #e9e8e2; --muted: #a0a89f;
+    --rule: #2f353a; --accent: #8fbf7b; --accent-ink: #a9d497; --lift: #1f2a21;
+    --code: #23282c; --dark-sq: #5f7a48; --light-sq: #c9c9ae; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper); color: var(--ink); margin: 0;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px; line-height: 1.5;
+  padding: 0 16px; padding-block: env(safe-area-inset-top, 0px) 48px;
+}
+main { max-width: 38rem; margin: 0 auto; }
+nav.top {
+  display: flex; align-items: center; gap: 12px; padding: 14px 0 10px;
+  border-bottom: 1px solid var(--rule); margin-bottom: 18px;
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.05em; font-size: 1rem; color: var(--muted);
+}
+nav.top a { color: var(--accent-ink); text-decoration: none; font-weight: 600; }
+nav.top .sq {
+  width: 14px; height: 14px; flex: none;
+  background: conic-gradient(var(--dark-sq) 0 25%, var(--light-sq) 0 50%, var(--dark-sq) 0 75%, var(--light-sq) 0);
+}
+h1, h2, h3, h4 {
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.03em; text-wrap: balance; line-height: 1.1;
+  margin: 1.6em 0 0.5em;
+}
+h1 { font-size: 2.3rem; margin-top: 0.2em; font-weight: 700; }
+h2 { font-size: 1.5rem; color: var(--accent-ink); padding-top: 0.6em; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; color: var(--muted); }
+p { margin: 0 0 1em; }
+ul, ol { padding-left: 1.3rem; margin: 0 0 1em; }
+li { margin-bottom: 0.35em; }
+strong { color: var(--accent-ink); font-weight: 650; }
+a { color: var(--accent-ink); }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 1.8em 0; }
+code { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 0.9em; background: var(--code); padding: 0.1em 0.3em; border-radius: 3px; }
+pre { background: var(--code); padding: 12px 14px; overflow-x: auto; border-radius: 4px; font-size: 0.9rem; line-height: 1.4; }
+pre code { background: none; padding: 0; }
+blockquote { border-left: 4px solid var(--accent); margin: 0 0 1em; padding: 0.2em 0 0.2em 14px; color: var(--muted); }
+.table-wrap { overflow-x: auto; margin: 0 0 1.2em; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; font-size: 0.93rem; min-width: 100%; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; color: var(--muted); }
+figure { margin: 1.2em 0 1.4em; }
+figure svg { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+figcaption { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 8px; font-style: italic; }
+.landing-card { background: var(--lift); border: 1px solid var(--rule); border-left: 5px solid var(--accent); padding: 4px 16px 10px; margin: 0 0 24px; }
+.landing-card h1 { font-size: 1.6rem; }
+.landing-card h2 { font-size: 1.15rem; border-top: 0; padding-top: 0.4em; }
+.landing-card ul { list-style: none; padding: 0; }
+.landing-card li { padding-left: 1.1rem; position: relative; }
+.landing-card li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 8px; background: var(--accent); }
+.toc h2 { border-top: 0; font-size: 1.1rem; color: var(--muted); margin-top: 1.4em; }
+.toc ul { list-style: none; padding: 0; }
+.toc li { margin: 0; border-bottom: 1px solid var(--rule); }
+.toc a { display: block; padding: 12px 0; text-decoration: none; font-size: 1.15rem; font-weight: 600; }
+.toc a span { display: block; font-weight: 400; font-size: 0.9rem; color: var(--muted); }
+details { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; margin: 0 0 1.4em; }
+summary {
+  cursor: pointer; padding: 10px 14px; color: var(--accent-ink); font-weight: 650;
+  font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.05rem;
+}
+details[open] summary { border-bottom: 1px solid var(--rule); }
+details > :not(summary) { margin-left: 14px; margin-right: 14px; }
+details > :last-child { margin-bottom: 12px; }
+.stamp { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
+</head>
+<body><main>
+<nav class="top"><span class="sq"></span><a href="../">Notes</a> / Game Log</nav>
+<h1>Game Log</h1>
+<p>One line per reviewed game. The <strong>Held?</strong> column is the only metric that matters: did the
+lesson from the <em>previous</em> reviewed game show up in this one (Yes / No / n/a if it never came up)?
+Fill it in during <code>/review-session</code>. Rows before this log existed are marked <code>?</code>: nobody checked at the time.
+Full write-ups live in the reflex notes; this is the index.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Game</th>
+<th>Colour</th>
+<th>Opening</th>
+<th>Result</th>
+<th>First miss (move)</th>
+<th>Lesson</th>
+<th>Held?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-01-15</td>
+<td><a href="https://lichess.org/7xSnLj41">7xSnLj41</a></td>
+<td>Black</td>
+<td>KID</td>
+<td>Loss</td>
+<td>9: ...Nb4 instead of ...Qa5+ winning material</td>
+<td>Look for checks before retreating</td>
+<td>start</td>
+</tr>
+<tr>
+<td>2026-01-17</td>
+<td><a href="https://lichess.org/RCduZi7B">RCduZi7B</a></td>
+<td>White</td>
+<td>Botvinnik</td>
+<td>Loss</td>
+<td>11: f4 instead of Bxg5, missed a free pawn</td>
+<td>They push a pawn and leave it hanging? Take it</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2026-01-21</td>
+<td><a href="https://lichess.org/X4ZSziPF">X4ZSziPF</a></td>
+<td>Black</td>
+<td>KID vs turtle</td>
+<td>Loss</td>
+<td>14: Rxc3 instead of b5, released the pin</td>
+<td>Pawns trap, exchanges relieve</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2026-01-29</td>
+<td><a href="https://lichess.org/4f4fSre5">4f4fSre5</a></td>
+<td>White</td>
+<td>Botvinnik</td>
+<td>Win</td>
+<td>8: h3 instead of f3 vs the Bg4 pin, lost queen for bishop</td>
+<td>Against Bg4 with ...Nd4 in: f3 kicks and breaks the pin</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2026-10-26</td>
+<td><a href="https://lichess.org/G2nuq7J1">G2nuq7J1</a></td>
+<td>White</td>
+<td>Botvinnik, 1...d5 2.cxd5 Qxd5</td>
+<td>Loss (maia1)</td>
+<td>15: Bxc5 traded into a hanging piece</td>
+<td>When they take, take back first</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2026-10-28</td>
+<td><a href="https://lichess.org/jm8Z3ObK">jm8Z3ObK</a></td>
+<td>White</td>
+<td>Botvinnik, 1...d5 2.cxd5 Qxd5</td>
+<td>Loss (maia1)</td>
+<td>20: Bg4 ignored the discovered attack on h4 after ...Nh7</td>
+<td>Pieces are curtains: when one moves, look behind it</td>
+<td>?</td>
+</tr>
+<tr>
+<td>2026-10-28</td>
+<td><a href="https://lichess.org/vjcIygbx">vjcIygbx</a></td>
+<td>White</td>
+<td>Botvinnik, 1...c5 2.Nc3 e5</td>
+<td>Loss (maia1)</td>
+<td>19: Ne7+ then 20.Nxg6+ traded the d5 knight for the bad g6 bishop</td>
+<td>Whose piece is better? Don't trade your best for their worst</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>2026-10-29</td>
+<td><a href="https://lichess.org/D5io7BOs">D5io7BOs</a></td>
+<td>White</td>
+<td>Botvinnik, 1...c6 2.Nc3 d5 3.cxd5 cxd5</td>
+<td>Loss (maia1)</td>
+<td>11: e4 instead of Nxd5 winning the isolated d5 pawn (4.g3?! allowed ...d4 earlier, unpunished)</td>
+<td>Their ...e5 left d5 alone? Count attackers and take</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>2026-10-30</td>
+<td><a href="https://lichess.org/3DvhfBlO">3DvhfBlO</a></td>
+<td>Black</td>
+<td>Caro, 2.e5 d6 3.exd6 exd6</td>
+<td>Win (maia1)</td>
+<td>9: ...c5 opened the f3-b7 diagonal; b7 hung twice (Maia missed it)</td>
+<td>A pawn is a curtain too: before ...c5, what is c6 shielding?</td>
+<td>No (15...Bxb2 missed after Nd5 left b2 loose)</td>
+</tr>
+<tr>
+<td>2026-10-31</td>
+<td><a href="https://lichess.org/FPWgeBkK">FPWgeBkK</a></td>
+<td>Black</td>
+<td>KID vs London, 6...c5 7.c3 cxd4 8.cxd4</td>
+<td>Loss (maia1)</td>
+<td>13: ...Qc7 offered a queen trade after Qxb7?; Rb8 then Nb4 was -2.4 (...Qb6 plan never played)</td>
+<td>Their queen ate b7? Rb8, chase her, never trade</td>
+<td>No (17...e5 moved the d6 curtain; Bxc7)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Earlier sessions (July and August 2026, roughly 20 games) were reviewed before this log existed;
+their lessons are in <code>botvinnik-reflexes.md</code> with game IDs inline.</p>
+</main></body>
+</html>
